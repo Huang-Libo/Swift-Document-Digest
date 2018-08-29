@@ -3,7 +3,7 @@
 
 **版本**: `Swift 4.2` (`Xcode 10`)  
 
-**创建仓库的起因**: 我去年把 `Swift` 官方文档看了一遍, 今年再回想, 很多细节都不记得了(公司项目用的是 `Objective-C`, 所以用 `Swift` 的机会也不多), 如果忘了就再读一遍, 或者需要时再去茫茫文档中查询, 感觉是在消耗时间做重复的事, 倒不如记录官方文档的要点和关键的示例代码, 日后的查询起来效率就高多了(也有一种把书读薄的功效).
+**创建仓库的起因**: 我去年把 `Swift` 官方文档看了一遍, 今年再回想, 很多细节都不记得了(公司项目用的是 `Objective-C`, 所以用 `Swift` 的机会也不多), 如果忘了就再读一遍, 或者需要时再去茫茫文档中查询, 感觉是在消耗时间做重复的事, 倒不如写摘要以记录官方文档的要点和关键的示例代码, 日后的查询起来效率就高多了(也有一种把书读薄的功效).
  
 **阅读提示**: 由于摘要比较简洁, 所以需要读者对 `Swift` 已有一定的了解, 或者大致看过官方文档([英文](https://docs.swift.org/swift-book)|[中文翻译版](https://www.cnswift.org/)). 
 
@@ -61,12 +61,23 @@ struct Fahrenheit {
 
 ## 默认初始化器
 
-如果一个`结构体`或`类`给它所有的属性都设置了默认值, 并且自身一个初始化器也没有提供(比如: 没有父类, 自身也没实现初始化器), 那么 Swift 就会为它提供一个`默认初始化器`.
+如果一个`结构体`或`类`给它所有的属性都设置了默认值, 并且自身一个初始化器也没有提供(比如: 没有父类, 自身也没实现初始化器), 那么 Swift 就会为它提供一个`默认初始化器`. 例如:
+
+```swift
+// 属性都有默认值, 类没有实现初始化器(也没有父类), 
+// 所以 Swift 会提供一个默认初始化器.
+class ShoppingListItem {
+    var name: String?
+    var quantity = 1
+    var purchased = false
+}
+var item = ShoppingListItem()
+```
 
 # 参考资料
 
-https://docs.swift.org/swift-book
-https://www.cnswift.org/
-http://swiftguide.cn/
+https://docs.swift.org/swift-book  
+https://www.cnswift.org/  
+http://swiftguide.cn/  
 
 
