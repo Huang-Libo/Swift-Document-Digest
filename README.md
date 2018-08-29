@@ -7,6 +7,10 @@
  
 **阅读提示**: 由于摘要比较简洁, 所以需要读者对 `Swift` 已有一定的了解, 或者大致看过官方文档([英文](https://docs.swift.org/swift-book)|[中文翻译版](https://www.cnswift.org/)). 个人推荐阅读英文版文档, 因为中文版的翻译会滞后一段时间, 并且翻译总有出错或失真部分. 可以在遇到看不懂的内容时再看中文翻译, 这样可以避免很多因翻译不准确而导致的误解.
 
+# 目录
+
+[初始化](https://github.com/Huang-Libo/Swift-Digest#%E5%88%9D%E5%A7%8B%E5%8C%96-initialization)
+
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
 指初始化`类`, `结构体`, `枚举`的实例, 并给`存储属性`赋值等操作.
@@ -76,7 +80,7 @@ var item = ShoppingListItem()
 
 #### 结构体类型的成员初始化器
 
-和`默认初始化器`不同的是, 结构体的成员初始化器不需要其存储属性都有默认值. 
+和`默认初始化器`不同的是, 结构体的`成员初始化器(memberwise initializer)`不需要其存储属性有默认值. 
 
 ```swift
 struct Size {
