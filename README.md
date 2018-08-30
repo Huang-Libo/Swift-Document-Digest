@@ -16,6 +16,7 @@
     - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Digest#值类型的初始化器委托)
     - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Digest#类的继承和初始化)
     - [两段式初始化](https://github.com/Huang-Libo/Swift-Digest#两段式初始化)
+- [参考资料](https://github.com/Huang-Libo/Swift-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
