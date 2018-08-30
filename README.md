@@ -186,11 +186,11 @@ convenience init(parameters) {
 2. 便捷初始化器必须调用*同一个类*中的初始化器.
 3. 便捷初始化器必须最终调用到指定初始化器.
 
-示例1:
-<img src="./media/initializerDelegation01_2x.png" width="70%" height="70%">
+示例1:  
+<img src="./media/initializerDelegation01_2x.png" width="50%" height="50%">
 
-示例2:
-<img src="./media/initializerDelegation02_2x.png" width="70%" height="70%">
+示例2:  
+<img src="./media/initializerDelegation02_2x.png" width="50%" height="50%">
 
 ## 两段式初始化
 
