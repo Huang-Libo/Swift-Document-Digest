@@ -96,7 +96,7 @@ let twoByTwo = Size(width: 2.0, height: 2.0)
 
 ## 值类型的初始化器委托
 
-`初始化器委托`: 初始化器可以调用其他初始化器来完成实例的部分初始化, 这样可以减少冗余代码.  
+`初始化器委托(Initializer Delegation)`: 初始化器可以调用其他初始化器来完成实例的部分初始化, 这样可以减少冗余代码.  
 
 注意: 
 1. `值类型`和`类类型`的初始化器规则不同, 值类型(结构体和枚举)不支持继承, 所以他们的初始化器委托过程相对简单. 类类型支持继承, 所以它要保证其所继承的所有存储属性都要在初始化时赋一个合适的值.
@@ -164,8 +164,8 @@ let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
 
 # 参考资料
 
-https://docs.swift.org/swift-book  
-https://www.cnswift.org/  
+官方文档(英文): https://docs.swift.org/swift-book  
+官方文档的中文翻译: https://www.cnswift.org/  
 http://swiftguide.cn/  
 
 
