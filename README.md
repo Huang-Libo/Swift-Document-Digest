@@ -15,7 +15,6 @@
     - [默认初始化器](https://github.com/Huang-Libo/Swift-Digest#默认初始化器)
     - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Digest#值类型的初始化器委托)
     - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Digest#类的继承和初始化)
-    - [两段式初始化](https://github.com/Huang-Libo/Swift-Digest#两段式初始化)
 - [参考资料](https://github.com/Huang-Libo/Swift-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
@@ -166,6 +165,8 @@ let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
 
 Swift 定义了两种初始化器来确保所有的存储属性(包括自身的和继承的)都接收到一个初始值: `指定初始化器(designated initializer)`和`便捷初始化器(convenience initializer)`.
 
+#### 指定初始化器和便捷初始化器
+
 类的指定初始化器的语法(和值类型的语法相同):
 ```swift
 init(parameters) {
@@ -193,7 +194,9 @@ convenience init(parameters) {
 示例2:  
 <img src="./media/initializerDelegation02_2x.png" width="50%" height="50%">
 
-## 两段式初始化
+#### 两段式初始化
+
+Swift 中的类初始化是一个两段式过程.
 
 # 参考资料
 
