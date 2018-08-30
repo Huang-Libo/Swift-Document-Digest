@@ -89,7 +89,73 @@ struct Size {
 let twoByTwo = Size(width: 2.0, height: 2.0)
 ```
 
-## 值类型的初始化器代理
+## 值类型的初始化器委托
+
+`初始化器委托`: 初始化器可以调用其他初始化器来完成实例的部分初始化, 这样可以减少冗余代码.  
+
+注意: 
+1. `值类型`和`类类型`的初始化器规则不同, 值类型(结构体和枚举)不支持继承, 所以他们的初始化器委托过程相对简单. 类类型支持继承, 所以它要保证其所继承的所有存储属性都要在初始化时赋一个合适的值.
+2. 如果你给值类型定义了一个自定义的初始化器, 那么你将无法访问`默认初始化器`(或者`成员初始化器`, 对结构体而言). 这个限制防止别人意外地使用自动初始化器而把复杂初始化器里提供的额外必要配置给绕开(中文文档里面把这里翻译成了覆盖, 是不对的)的情况发生。
+3. 如果你想让值类型使用默认初始化器或成员初始化器, 同时也使用自定义初始化器, 那么请在`拓展(Extension)`中实现自定义初始化器.
+
+对值类型而言, 可以通过 `self.init`来调用其他初始化器, `self.init`只能在初始化器中调用.
+
+实例: 
+
+```swift
+struct Size {
+    var width = 0.0, height = 0.0
+}
+struct Point {
+    var x = 0.0, y = 0.0
+}
+```
+
+```swift
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    // 初始化器一
+    init() {}
+    // 初始化器二
+    init(origin: Point, size: Size) {
+        self.origin = origin
+        self.size = size
+    }
+    // 初始化器三
+    init(center: Point, size: Size) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        self.init(origin: Point(x: originX, y: originY), size: size)
+    }
+}
+```
+
+解读:  
+
+第一个初始化器, 和`默认初始化器`功能相同.
+```swift
+let basicRect = Rect()
+// basicRect's origin is (0.0, 0.0) and its size is (0.0, 0.0)
+```
+
+第二个初始化器, 和`成员初始化器`功能相同.
+```swift
+let originRect = Rect(origin: Point(x: 2.0, y: 2.0),
+                      size: Size(width: 5.0, height: 5.0))
+// originRect's origin is (2.0, 2.0) and its size is (5.0, 5.0)
+```
+
+第三个初始化器中调用了第二个初始化器(初始化器委托).
+```swift
+let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
+                      size: Size(width: 3.0, height: 3.0))
+// centerRect's origin is (2.5, 2.5) and its size is (3.0, 3.0)
+```
+
+如果不想自己实现 `init()` and `init(origin:size:)`, 则需要在`扩展(Extension)`中实现 `init(center:size:)` 初始化器.  
+
+## 类的继承和初始化
 
 # 参考资料
 
