@@ -163,7 +163,7 @@ let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
 
 ## 类的继承和初始化
 
-Swift 定义了两种初始化器来确保所有的存储属性(包括自身的和继承的)都接收到一个初始值: `指定初始化器(designated initializer)`和`便捷初始化器(convenience initializer)`.
+Swift 为`类类型`定义了两种初始化器来确保所有的存储属性(包括自身的和继承的)都接收到一个初始值: `指定初始化器(designated initializer)`和`便捷初始化器(convenience initializer)`.
 
 #### 指定初始化器和便捷初始化器
 
