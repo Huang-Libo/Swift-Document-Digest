@@ -24,6 +24,7 @@
     - [默认初始化器](https://github.com/Huang-Libo/Swift-Digest#默认初始化器)
     - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Digest#值类型的初始化器委托)
     - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Digest#类的继承和初始化)
+    - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Digest#可失败的初始化器)
 - [参考资料](https://github.com/Huang-Libo/Swift-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
@@ -110,7 +111,7 @@ let twoByTwo = Size(width: 2.0, height: 2.0)
 
 注意: 
 1. `值类型`和`类类型`的初始化器规则不同, 值类型(结构体和枚举)不支持继承, 所以他们的初始化器委托过程相对简单. 类类型支持继承, 所以它要保证其所继承的所有存储属性都要在初始化时赋一个合适的值.
-2. 如果你给值类型定义了一个自定义的初始化器, 那么你将无法访问`默认初始化器`(或者`成员初始化器`, 对结构体而言). 这个限制防止别人意外地使用自动初始化器而把复杂初始化器里提供的额外必要配置给绕开(原单词是 circumvented , 中文文档里面把这里翻译成了覆盖, 是不对的)的情况发生。
+2. 如果你给值类型定义了一个自定义的初始化器, 那么你将无法访问`默认初始化器`(或者`成员初始化器`, 对结构体而言). 这个限制防止别人意外地使用自动初始化器而把复杂初始化器里提供的额外必要配置给绕开的情况发生。
 3. 如果你想让值类型使用默认初始化器或成员初始化器, 同时也使用自定义初始化器, 那么请在`拓展(Extension)`中实现自定义初始化器.
 
 对值类型而言, 可以通过 `self.init`来调用其他初始化器, `self.init`只能在初始化器中调用.
@@ -257,7 +258,7 @@ Swift 的编译器执行4个有效的安全性检查来确保两段式初始化�
 
 #### 初始化器的继承和重写
 
-
+## 可失败的初始化器
 
 # 参考资料
 
