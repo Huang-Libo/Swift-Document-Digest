@@ -18,14 +18,14 @@
 
 # 目录
 
-- [初始化](https://github.com/Huang-Libo/Swift-Digest#初始化-initialization)
-    - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Digest#为存储属性设置初始化值)
-    - [自定义初始化](https://github.com/Huang-Libo/Swift-Digest#自定义初始化)
-    - [默认初始化器](https://github.com/Huang-Libo/Swift-Digest#默认初始化器)
-    - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Digest#值类型的初始化器委托)
-    - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Digest#类的继承和初始化)
-    - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Digest#可失败的初始化器)
-- [参考资料](https://github.com/Huang-Libo/Swift-Digest#参考资料)
+- [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
+    - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
+    - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
+    - [默认初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#默认初始化器)
+    - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Document-Digest#值类型的初始化器委托)
+    - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Document-Digest#类的继承和初始化)
+    - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#可失败的初始化器)
+- [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
