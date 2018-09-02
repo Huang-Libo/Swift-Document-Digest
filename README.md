@@ -14,8 +14,6 @@
 
 </details>
 
-
-
 # 目录
 
 - [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
@@ -25,6 +23,8 @@
     - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Document-Digest#值类型的初始化器委托)
     - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Document-Digest#类的继承和初始化)
     - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#可失败的初始化器)
+    - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#必要初始化器)
+    - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
 - [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
@@ -208,7 +208,7 @@ convenience init(parameters) {
 
 Swift 中的类初始化是一个两段式过程:  
 **第一阶段**: 每一个存储属性都被引入它的类赋一个初始值.(方向: 从子类到父类)  
-**第二阶段**: 每个类定制其存储属性.(方向: 从父类到子类)  
+**第二阶段**: 每个类定制其存储属性(包括自身引入的和继承的存储属性).(方向: 从父类到子类)  
 
 两段式初始化的好处:   
 
@@ -258,7 +258,15 @@ Swift 的编译器执行4个有效的安全性检查来确保两段式初始化�
 
 #### 初始化器的继承和重写
 
+#### 初始化器的自动继承
+
+#### 指定初始化器和便捷初始化器实例
+
 ## 可失败的初始化器
+
+## 必要初始化器
+
+## 通过闭包或函数来设置属性的默认值
 
 # 参考资料
 
