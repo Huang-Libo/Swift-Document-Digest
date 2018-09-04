@@ -25,6 +25,7 @@
     - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#可失败的初始化器)
     - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#必要初始化器)
     - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
+- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化)
 - [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
@@ -199,10 +200,10 @@ convenience init(parameters) {
 3. 便捷初始化器必须最终调用到指定初始化器.
 
 示例1:  
-<img src="./media/initializerDelegation01_2x.png" width="50%" height="50%">
+<img src="./media/initializerDelegation01_2x.png" width="70%" height="70%">
 
 示例2:  
-<img src="./media/initializerDelegation02_2x.png" width="50%" height="50%">
+<img src="./media/initializerDelegation02_2x.png" width="70%" height="70%">
 
 #### 两段式初始化
 
@@ -246,14 +247,14 @@ Swift 的编译器执行4个有效的安全性检查来确保两段式初始化�
 - 这个过程沿着继承链向上执行, 直到到达继承链的顶端.
 - 到达继承链顶端后, 顶端的这个类确保了其所有的存储属性都有一个值, 这个实例的内存就被认为完成了初始化, 第一阶段完成.
 
-<img src="./media/twoPhaseInitialization01_2x.png" width="50%" height="50%">  
+<img src="./media/twoPhaseInitialization01_2x.png" width="70%" height="70%">  
 
 **第二阶段**  
 
 - 从继承链顶部往下执行, 每一个指定初始化器都有机会来进一步定制实例, 初始化器现在可以访问 self 和修改他的属性, 调用实例方法, 等等.
 - 最后, 继承链上的任何便捷初始化器都有机会来定制这个实例和使用 self.
 
-<img src="./media/twoPhaseInitialization02_2x.png" width="50%" height="50%">  
+<img src="./media/twoPhaseInitialization02_2x.png" width="70%" height="70%">  
 
 
 #### 初始化器的继承和重写
@@ -282,7 +283,93 @@ Swift 的编译器执行4个有效的安全性检查来确保两段式初始化�
 
 如果你的子类为父类的所有指定初始化器提供了实现---无论是按照`规则一`继承而来的, 还是作为子类定义的一部分自己实现的, 它都会自动继承父类的所有便捷初始化器.
 
-#### 指定初始化器和便捷初始化器实例
+#### 指定初始化器和便捷初始化器实战
+
+以下这个例子三个层级的类: Food, RecipeIngredient, ShoppingListItem, 并且展示了它们的初始化器是如何交互的.  
+
+这个层级中的基类是 `Food`:   
+
+```swift
+class Food {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    convenience init() {
+        self.init(name: "[Unnamed]")
+    }
+}
+```
+
+<img src="./media/initializersExample01_2x.png" width="70%" height="70%">  
+
+```swift
+let namedMeat = Food(name: "Bacon")
+// namedMeat's name is "Bacon"
+
+let mysteryMeat = Food()
+// mysteryMeat's name is "[Unnamed]"
+```
+
+这个层级中的第二个类  `RecipeIngredient` 是 `Food` 的子类:  
+
+```swift
+class RecipeIngredient: Food {
+    var quantity: Int
+    init(name: String, quantity: Int) {
+        self.quantity = quantity
+        super.init(name: name)
+    }
+    override convenience init(name: String) {
+        self.init(name: name, quantity: 1)
+    }
+}
+```
+
+<img src="./media/initializersExample02_2x.png" width="70%" height="70%">  
+
+`RecipeIngredient` 的 `init(name: String)` 便捷初始化器和 `Food` 中的 `init(name: String)` 指定初始化器带有相同的参数. 由于这个便捷初始化器重写了父类的指定初始化器, 所以它必须使用 `override` 修饰.  
+
+由于 `RecipeIngredient` 为父类的所有指定初始化器提供了实现, 所以 `RecipeIngredient` 自动地继承了父类的所有便捷初始化器. 在这个例子中, 父类 `Food` 只有一个叫 `init()` 的便捷初始化器, 这个初始化器就被 `RecipeIngredient` 继承了. 继承而来的 `init()` 和 `Food` 类中的行为是一样的, 除了它将 `init(name: String)` 委托给了 `RecipeIngredient` 中的那个版本, 而不是 `Food` 中的那个版本.  
+
+```swift
+let oneMysteryItem = RecipeIngredient()
+let oneBacon = RecipeIngredient(name: "Bacon")
+let sixEggs = RecipeIngredient(name: "Eggs", quantity: 6)
+```
+
+层级中的最后一个类是 `RecipeIngredient` 的子类, 叫做 `ShoppingListItem`:  
+
+```swift
+class ShoppingListItem: RecipeIngredient {
+    var purchased = false
+    var description: String {
+        var output = "\(quantity) x \(name)"
+        output += purchased ? " ✔" : " ✘"
+        return output
+    }
+}
+```
+
+因为这个类为自身所引入的所有属性都提供了一个默认值, 并且自身没有定义任何初始化器, 所以 `ShoppingListItem` 自动地继承了父类的所有指定初始化器和便捷初始化器.       
+
+<img src="./media/initializersExample03_2x.png" width="70%" height="70%">  
+
+```swift
+var breakfastList = [
+    ShoppingListItem(),
+    ShoppingListItem(name: "Bacon"),
+    ShoppingListItem(name: "Eggs", quantity: 6),
+]
+breakfastList[0].name = "Orange juice"
+breakfastList[0].purchased = true
+for item in breakfastList {
+    print(item.description)
+}
+// 1 x Orange juice ✔
+// 1 x Bacon ✘
+// 6 x Eggs ✘
+```
 
 ## 可失败的初始化器
 
