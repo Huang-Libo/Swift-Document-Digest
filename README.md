@@ -32,7 +32,7 @@
 
 指初始化`类`, `结构体`, `枚举`的实例, 并给`存储属性`赋值等操作.
 
-和 `Objective-C` 的初始化器不同的是, `Swift` 的初始化器不 `return` 值.
+和 `Objective-C` 的初始化器不同的是, `Swift` 的初始化器不返回值.
 
 类的实例还可以实现一个`反初始化器`.
 
@@ -372,6 +372,66 @@ for item in breakfastList {
 ```
 
 ## 可失败的初始化器
+
+有的时候为`类`, `结构体`, `枚举`定义可失败的初始化器是有用的.  
+
+在 `init` 关键字后面添加一个问号就是可失败的初始化器(`init?`).  
+
+注意: 不能定义*含有相同参数类型和名称*的可失败和非可失败初始化器.  
+
+可失败初始化器会创建一个该类的可选值. 你在可失败初始化器中写 `return nil` 来触发初始化失败.  
+
+注意: 严格来讲, 初始化器没有返回值. 它们的角色是确保初始化结束时 `self` 被完全和正确地初始化了, 尽管你写 `return nil` 来触发初始化失败, 但是你不能用 `return` 关键字来表示初始化成功.  
+
+例如, 可失败的初始化器为数值类型转换做了实现. 要确保数值类型间的转换保持值不变, 使用 `init(exactly:)` 初始化器. 如果类型转换不能保持值不变, 那么初始化失败.  
+
+```swift
+let wholeNumber: Double = 12345.0
+let pi = 3.14159
+
+if let valueMaintained = Int(exactly: wholeNumber) {
+    print("\(wholeNumber) conversion to Int maintains value of \(valueMaintained)")
+}
+// Prints "12345.0 conversion to Int maintains value of 12345"
+
+let valueChanged = Int(exactly: pi)
+// valueChanged is of type Int?, not Int
+
+if valueChanged == nil {
+    print("\(pi) conversion to Int does not maintain value")
+}
+// Prints "3.14159 conversion to Int does not maintain value"
+```
+
+另一个自定义类的例子:  
+
+```swift
+struct Animal {
+    let species: String
+    init?(species: String) {
+        if species.isEmpty { return nil }
+        self.species = species
+    }
+}
+
+
+let someCreature = Animal(species: "Giraffe")
+// someCreature is of type Animal?, not Animal
+
+if let giraffe = someCreature {
+    print("An animal was initialized with a species of \(giraffe.species)")
+}
+// Prints "An animal was initialized with a species of Giraffe"
+
+
+let anonymousCreature = Animal(species: "")
+// anonymousCreature is of type Animal?, not Animal
+
+if anonymousCreature == nil {
+    print("The anonymous creature could not be initialized")
+}
+// Prints "The anonymous creature could not be initialized"
+```
 
 ## 必要初始化器
 
