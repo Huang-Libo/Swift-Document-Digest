@@ -433,7 +433,19 @@ if anonymousCreature == nil {
 // Prints "The anonymous creature could not be initialized"
 ```
 
+#### 枚举的可失败初始化器
+
+#### 带有原始值枚举的可失败初始化器
+
+#### 初始化失败的传递
+
+#### 重写一个可失败初始化器
+
+#### init! 可失败初始化器
+
 ## 必要初始化器
+
+
 
 ## 通过闭包或函数来设置属性的默认值
 
