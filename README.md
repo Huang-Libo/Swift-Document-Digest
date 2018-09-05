@@ -535,6 +535,60 @@ if let oneUnnamed = CartItem(name: "", quantity: 1) {
 
 #### 重写一个可失败初始化器
 
+你可以在子类中重写父类的可失败初始化器, 就和其他任何初始化器一样. 或者, 你可以在子类中使用*不可失败*初始化器来重写父类的可失败初始化器. 这使你能够在子类中定义一个不可失败的初始化器, 尽管其父类对应的初始化器允许失败.  
+
+要注意的是如果你用不可失败的子类初始化器重写了父类的可失败初始化器, 委托给父类初始化器的唯一方式是对父类可失败初始化器的结果强制解包.  
+
+注意: 你可以用一个不可失败初始化器来重写一个可失败初始化器, 但是反过来不行.  
+
+在以下的例子中, `Document` 类的 `name` 属性可以是非空字符串或者 `nil`, 但是不能是一个空字符串.
+
+```swift
+class Document {
+    var name: String?
+    // this initializer creates a document with a nil name value
+    init() {}
+    // this initializer creates a document with a nonempty name value
+    init?(name: String) {
+        if name.isEmpty { return nil }
+        self.name = name
+    }
+}
+```
+
+接下来定义了 `Document` 的子类, 叫做 `AutomaticallyNamedDocument`. 它重写了 `Document` 中的两个指定初始化器. 
+
+```swift
+class AutomaticallyNamedDocument: Document {
+    override init() {
+        super.init()
+        self.name = "[Untitled]"
+    }
+    override init(name: String) {
+        super.init()
+        if name.isEmpty {
+            self.name = "[Untitled]"
+        } else {
+            self.name = name
+        }
+    }
+}
+```
+
+`AutomaticallyNamedDocument` 使用不可失败的 `init(name:)` 初始化器重写了父类的可失败初始化器 `init?(name:)`. 由于 `AutomaticallyNamedDocument` 处理空字符串的规则和父类的不同, 它的初始化器不需要失败, 所以它提供了一个不可失败版本的初始化器.  
+
+你可以在一个初始化器中使用强制解包来调用父类中的可失败初始化器, 以作为子类的不可失败初始化器实现的一部分. 例如, 下面的 `UntitledDocument` 子类总是把 name 属性命名为 "[Untitled]", 并且它在初始化的时候使用了父类的可失败初始化器 `init(name:)`. 
+
+由于 name 参数总是有值, 所以强制解包不会产生运行时错误.
+
+```swift
+class UntitledDocument: Document {
+    override init() {
+        super.init(name: "[Untitled]")!
+    }
+}
+```
+
 #### init! 可失败初始化器
 
 ## 必要初始化器
