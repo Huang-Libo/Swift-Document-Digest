@@ -16,17 +16,17 @@
 
 # 目录
 
-- [初始化](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#初始化-initialization)
-    - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#为存储属性设置初始化值)
-    - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#自定义初始化)
-    - [默认初始化器](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#默认初始化器)
-    - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#值类型的初始化器委托)
-    - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#类的继承和初始化)
-    - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#可失败的初始化器)
-    - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#必要初始化器)
-    - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#通过闭包或函数来设置属性的默认值)
-- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#反初始化)
-- [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#参考资料)
+- [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
+    - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
+    - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
+    - [默认初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#默认初始化器)
+    - [值类型的初始化器委托](https://github.com/Huang-Libo/Swift-Document-Digest#值类型的初始化器委托)
+    - [类的继承和初始化](https://github.com/Huang-Libo/Swift-Document-Digest#类的继承和初始化)
+    - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#可失败的初始化器)
+    - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#必要初始化器)
+    - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
+- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化)
+- [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
@@ -40,7 +40,7 @@
 
 > `类`和`结构体`在创建实例时, 必须给他们的`存储属性`设置一个合适的初始值. (通过初始化器设置, 或者在定义时给一个默认值, 这两种途径都不会触发`属性观察`)  
 
-如果一个存储属性**总是使用固定值**, 最好是在定义时就给定初始化值, 而不是在初始化器中设置. 这样更简洁易读, 并且有利于 Swift 根据默认值去推断属性的类型, 还可以使我们更容易地利用[默认初始化器](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#默认初始化器)和[初始化器继承](https://github.com/Huang-Libo/Swift-Document-Digest/blob/master/README.md#类的继承和初始化). 例如, 如果 temperature 属性是一个固定值:
+如果一个存储属性**总是使用固定值**, 最好是在定义时就给定初始化值, 而不是在初始化器中设置. 这样更简洁易读, 并且有利于 Swift 根据默认值去推断属性的类型, 还可以使我们更容易地利用[默认初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#默认初始化器)和[初始化器继承](https://github.com/Huang-Libo/Swift-Document-Digest#类的继承和初始化). 例如, 如果 temperature 属性是一个固定值:
 
 
 推荐:
