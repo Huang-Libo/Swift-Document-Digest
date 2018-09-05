@@ -595,7 +595,7 @@ class UntitledDocument: Document {
 
 你可以在 `init?` 初始化器中委托调用 `init!` 初始化器，反之亦然。 你也可以用 `init!` 重写 `init?` ，反之亦然。 你还可以用 `init` 委托调用 `init!` ，尽管当 `init!` 初始化器导致初始化失败时会触发断言。
 
-## 必要初始化器
+## <!-- more -->
 
 在`类`的初始化器前面写 `required` 修饰符来表示这个类的所有子类都必须实现这个初始化器:
 
@@ -618,6 +618,23 @@ class SomeSubclass: SomeClass {
 ```
 
 ## 通过闭包或函数来设置属性的默认值
+
+如果一个存储属性的默认值需要一些自定义或设置, 你可以使用一个`闭包`或`全局函数`来为那个属性提供自定义的默认值.  
+
+```swift
+class SomeClass {
+    let someProperty: SomeType = {
+        // create a default value for someProperty inside this closure
+        // someValue must be of the same type as SomeType
+        return someValue
+    }()
+}
+```
+
+注意闭包结尾处紧跟着一对圆括号, 这告诉 Swift 去立即执行这个闭包.  
+
+注意: 如果你使用一个闭包去初始化属性, 要记住当闭包执行时, 该实例的剩余部分还没有初始化好, 这意味着在闭包内你不能访问任何属性值, 即使那些属性有默认值. 你也不能隐式使用 `self` 属性, 或者调用任何实例方法.  
+
 
 # 反初始化([Deinitialization](https://docs.swift.org/swift-book/LanguageGuide/Deinitialization.html))
 
