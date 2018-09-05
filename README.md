@@ -597,7 +597,25 @@ class UntitledDocument: Document {
 
 ## 必要初始化器
 
+在`类`的初始化器前面写 `required` 修饰符来表示这个类的所有子类都必须实现这个初始化器:
 
+```swift
+class SomeClass {
+    required init() {
+        // initializer implementation goes here
+    }
+}
+```
+
+你也必须在每个子类实现的必要初始化器前面写上 `required` 修饰符, 来表示初始化器的必要性在继承链的子类上继续适用. 当你重写一个*必要*指定初始化器时, 不需要写 `override` 修饰符.  
+
+```swift
+class SomeSubclass: SomeClass {
+    required init() {
+        // subclass implementation of the required initializer goes here
+    }
+}
+```
 
 ## 通过闭包或函数来设置属性的默认值
 
