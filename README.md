@@ -489,7 +489,49 @@ if unknownUnit == nil {
 
 #### 初始化失败的传递
 
+`类`, `结构体`, `枚举`的可失败初始化器能委托给同一个`类`, `结构体`, `枚举`中的另一个可失败初始化器, 类似的, 子类的可失败初始化器可向上委托给父类的可失败初始化器.
 
+注意: 可失败初始化器也可以委托给不可失败初始化器. Use this approach if you need to add a potential failure state to an existing initialization process that does not otherwise fail. (这句话怎么理解? 需要用实例来作说明)
+
+```swift
+class Product {
+    let name: String
+    init?(name: String) {
+        if name.isEmpty { return nil }
+        self.name = name
+    }
+}
+
+class CartItem: Product {
+    let quantity: Int
+    init?(name: String, quantity: Int) {
+        if quantity < 1 { return nil }
+        self.quantity = quantity
+        super.init(name: name)
+    }
+}
+
+if let twoSocks = CartItem(name: "sock", quantity: 2) {
+    print("Item: \(twoSocks.name), quantity: \(twoSocks.quantity)")
+}
+// Prints "Item: sock, quantity: 2"
+
+
+if let zeroShirts = CartItem(name: "shirt", quantity: 0) {
+    print("Item: \(zeroShirts.name), quantity: \(zeroShirts.quantity)")
+} else {
+    print("Unable to initialize zero shirts")
+}
+// Prints "Unable to initialize zero shirts"
+
+
+if let oneUnnamed = CartItem(name: "", quantity: 1) {
+    print("Item: \(oneUnnamed.name), quantity: \(oneUnnamed.quantity)")
+} else {
+    print("Unable to initialize one unnamed product")
+}
+// Prints "Unable to initialize one unnamed product"
+```
 
 #### 重写一个可失败初始化器
 
