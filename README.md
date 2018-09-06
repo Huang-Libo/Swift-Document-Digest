@@ -16,6 +16,7 @@
 
 # 目录
 
+- [属性](https://github.com/Huang-Libo/Swift-Document-Digest#属性-properties)
 - [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
     - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
     - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
@@ -25,8 +26,12 @@
     - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#可失败的初始化器)
     - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#必要初始化器)
     - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
-- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化deinitialization)
+- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化-deinitialization)
 - [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
+
+# 属性 ([properties](https://docs.swift.org/swift-book/LanguageGuide/Properties.html))
+
+
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
@@ -636,7 +641,7 @@ class SomeClass {
 注意: 如果你使用一个闭包去初始化属性, 要记住当闭包执行时, 该实例的剩余部分还没有初始化好, 这意味着在闭包内你不能访问任何属性值, 即使那些属性有默认值. 你也不能隐式使用 `self` 属性, 或者调用任何实例方法.  
 
 
-# 反初始化([Deinitialization](https://docs.swift.org/swift-book/LanguageGuide/Deinitialization.html))
+# 反初始化 ([Deinitialization](https://docs.swift.org/swift-book/LanguageGuide/Deinitialization.html))
 
 反初始化器在类的实例释放之前立即调用. 只有`类`类型有反初始化器.  
 
