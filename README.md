@@ -25,7 +25,7 @@
     - [可失败的初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#可失败的初始化器)
     - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#必要初始化器)
     - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
-- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化)
+- [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化deinitialization)
 - [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
@@ -637,6 +637,22 @@ class SomeClass {
 
 
 # 反初始化([Deinitialization](https://docs.swift.org/swift-book/LanguageGuide/Deinitialization.html))
+
+反初始化器在类的实例释放之前立即调用. 只有`类`类型有反初始化器.  
+
+Swift 也是通过 ARC(Automatic Reference Counting) 来管理内存的. 一般情况下当实例销毁时你不需要做手动清理. 但是, 如果你在使用你自己的资源 , 你就需要做一些额外的清理工作. 比如, 你创建了一个自定义的类来打开一个文件并且写入一些数据, 那么你需要在类的实例销毁前关闭这个文件.  
+
+一个类最多只能有一个反初始化器, 反初始化器不带任何参数并且没有圆括号:  
+
+```swift
+deinit {
+    // perform the deinitialization
+}
+```
+
+反初始化器是在实例即将要被释放前自动调用的. 你不能自己调用反初始化器. 父类的反初始化器会被子类自动继承, 并且父类的反初始化器会在子类的反初始化器实现的最后面自动调用. 父类的反初始化器总是会被调用, 即使子类没有提供反初始化器.  
+
+因为实例是在反初始化器调用后才被释放, 所以在反初始化器里面,    可以获取这个实例的所有属性, 并且可以基于这些属性修改实例自身的行为. (比如查找需要关闭的文件的名称)  
 
 # 参考资料
 
