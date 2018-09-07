@@ -31,11 +31,13 @@
 
 # 属性 ([properties](https://docs.swift.org/swift-book/LanguageGuide/Properties.html))
 
+属性把值与特定的`类`, `结构体`, 或`枚举`关联起来. 
 
 
-# 初始化 ([Initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
-指初始化`类`, `结构体`, `枚举`的实例, 并给`存储属性`赋值等操作.
+# 初始化 ([initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
+
+指初始化`类`, `结构体`, 或`枚举`的实例, 并给`存储属性`赋值等操作.
 
 和 `Objective-C` 的初始化器不同的是, `Swift` 的初始化器不返回值.
 
@@ -378,7 +380,7 @@ for item in breakfastList {
 
 ## 可失败的初始化器
 
-有的时候为`类`, `结构体`, `枚举`定义可失败的初始化器是有用的.  
+有的时候为`类`, `结构体`, 或`枚举`定义可失败的初始化器是有用的.  
 
 在 `init` 关键字后面添加一个问号就是可失败的初始化器(`init?`).  
 
@@ -494,7 +496,7 @@ if unknownUnit == nil {
 
 #### 初始化失败的传递
 
-`类`, `结构体`, `枚举`的可失败初始化器能委托给同一个`类`, `结构体`, `枚举`中的另一个可失败初始化器, 类似的, 子类的可失败初始化器可向上委托给父类的可失败初始化器.
+`类`, `结构体`, 或`枚举`的可失败初始化器能委托给同一个`类`, `结构体`, 或`枚举`中的另一个可失败初始化器, 类似的, 子类的可失败初始化器可向上委托给父类的可失败初始化器.
 
 注意: 可失败初始化器也可以委托给不可失败初始化器. Use this approach if you need to add a potential failure state to an existing initialization process that does not otherwise fail. (这句话怎么理解? 需要用实例来作说明)
 
@@ -641,7 +643,7 @@ class SomeClass {
 注意: 如果你使用一个闭包去初始化属性, 要记住当闭包执行时, 该实例的剩余部分还没有初始化好, 这意味着在闭包内你不能访问任何属性值, 即使那些属性有默认值. 你也不能隐式使用 `self` 属性, 或者调用任何实例方法.  
 
 
-# 反初始化 ([Deinitialization](https://docs.swift.org/swift-book/LanguageGuide/Deinitialization.html))
+# 反初始化 ([deinitialization](https://docs.swift.org/swift-book/LanguageGuide/Deinitialization.html))
 
 反初始化器在类的实例释放之前立即调用. 只有`类`类型有反初始化器.  
 
