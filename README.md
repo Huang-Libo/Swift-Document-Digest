@@ -33,7 +33,49 @@
 
 属性把值与特定的`类`, `结构体`, 或`枚举`关联起来. 
 
+存储属性存储常量和变量以作为实例的一部分, 反之计算属性是计算(而不是存储)值. 计算属性可由`类`, `结构体`和`枚举`定义. 存储只能被`类`和`结构体`定义.  
 
+## 存储属性
+
+```swift
+struct FixedLengthRange {
+    var firstValue: Int
+    let length: Int
+}
+var rangeOfThreeItems = FixedLengthRange(firstValue: 0, length: 3)
+// the range represents integer values 0, 1, and 2
+rangeOfThreeItems.firstValue = 6
+// the range now represents integer values 6, 7, and 8
+```
+
+#### 常量结构体实例的存储属性
+
+如果你创建了一个结构体的实例并且将这个实例赋值给一个常量, 那么你不能修改这个实例的属性, 即使它们被声明为可变属性.  
+
+```swift
+let rangeOfFourItems = FixedLengthRange(firstValue: 0, length: 4)
+// this range represents integer values 0, 1, 2, and 3
+rangeOfFourItems.firstValue = 6
+// this will report an error, even though firstValue is a variable property
+```
+
+这是因为结构体是`值类型`. 当一个`值类型`的实例被标记为常量时, 那么它的所有属性也都是常量.  
+
+这个规则对`类`不适用, 因为`类`是`引用类型`. 如果你把引用类型的实例赋值给一个常量, 你仍然能改变那个实例的可变属性.  
+
+#### 延迟存储属性
+
+`延迟存储属性`是初始值直到第一次使用时才被计算的属性. 在属性的声明前添加 `lazy` 关键字, 以表明它是延迟属性.   
+
+注意: 延迟存储属性必须总是被声明为变量(使用`var`关键字), 因为它的初始值可能在实例初始化完成后才被获取. 但是常量属性必须总是要在初始化完成前获取一个值, 因此常量属性不能被声明为 `lazy` 属性.  
+
+注意: 如果一个被 `lazy` 修饰符标识的属性被多个线程同时访问, 并且这个属性还没有被初始化, 那么无法保证这个属性只会被初始化一次.   
+
+#### 存储属性和实例变量
+
+如果你有 `Objective-C` 的经验, 你可能知道它的类的实例有两种方式来存储值和引用. 除了*属性*, 你可以使用*实例变量*作为存储在属性中的值的后备存储.  
+
+Swift 将这两种概念统一到单一的属性声明中. Swift 属性没有对应的*实例变量*, 并且属性的后备存储不能被直接访问. 这种机制避免了值在不同的上下文中是如何访问的困惑, 并且将属性的声明简化为一个单一的, 限定的语句. 属性的所有信息---包括它的名字, 类型, 和内存管理特性, 都作为这个类型的定义放在同一个地方.  
 
 # 初始化 ([initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
