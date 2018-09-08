@@ -77,6 +77,82 @@ rangeOfFourItems.firstValue = 6
 
 Swift 将这两种概念统一到单一的属性声明中. Swift 属性没有对应的*实例变量*, 并且属性的后备存储不能被直接访问. 这种机制避免了值在不同的上下文中是如何访问的困惑, 并且将属性的声明简化为一个单一的, 限定的语句. 属性的所有信息---包括它的名字, 类型, 和内存管理特性, 都作为这个类型的定义放在同一个地方.  
 
+## 计算属性
+
+除了存储属性, `类`, `结构体`和`枚举`能定义*计算属性*, 它实际不存储值. 相反, 计算属性提供一个 `getter` 和一个可选的 `setter` 来取值和间接地设置属性和值.  
+
+```swift
+struct Point {
+    var x = 0.0, y = 0.0
+}
+struct Size {
+    var width = 0.0, height = 0.0
+}
+struct Rect {
+    var origin = Point()
+    var size = Size()
+    var center: Point {
+        get {
+            let centerX = origin.x + (size.width / 2)
+            let centerY = origin.y + (size.height / 2)
+            return Point(x: centerX, y: centerY)
+        }
+        set(newCenter) {
+            origin.x = newCenter.x - (size.width / 2)
+            origin.y = newCenter.y - (size.height / 2)
+        }
+    }
+}
+var square = Rect(origin: Point(x: 0.0, y: 0.0),
+                  size: Size(width: 10.0, height: 10.0))
+let initialSquareCenter = square.center
+square.center = Point(x: 15.0, y: 15.0)
+print("square.origin is now at (\(square.origin.x), \(square.origin.y))")
+// Prints "square.origin is now at (10.0, 10.0)"
+```
+
+#### 简写 setter 声明
+
+如果一个计算属性的 `setter` 没有为需要被设置的新值定义一个名称, 那么默认的名称 `newValue` 将会被使用. 下面是 `Rect` 结构体的另一种写法, 这种写法利用了简写声明:  
+
+```swift
+struct AlternativeRect {
+    var origin = Point()
+    var size = Size()
+    var center: Point {
+        get {
+            let centerX = origin.x + (size.width / 2)
+            let centerY = origin.y + (size.height / 2)
+            return Point(x: centerX, y: centerY)
+        }
+        set {
+            origin.x = newValue.x - (size.width / 2)
+            origin.y = newValue.y - (size.height / 2)
+        }
+    }
+}
+```
+
+#### 可读的计算属性
+
+一个只有 `getter` 但是没有 `setter` 的计算属性被称作*只读的计算属性*. 
+
+注意: 你必须使用 `var` 关键字将计算属性(包括只读计算属性)声明为可变属性, 因为它们的值不是固定的. `let` 关键字只是用于常量属性, 来表明它们的值一旦作为实例初始化的一部分被设置后就不能再更改了.  
+
+```swift
+struct Cuboid {
+    var width = 0.0, height = 0.0, depth = 0.0
+    var volume: Double {
+        return width * height * depth
+    }
+}
+let fourByFiveByTwo = Cuboid(width: 4.0, height: 5.0, depth: 2.0)
+print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)")
+// Prints "the volume of fourByFiveByTwo is 40.0"
+```
+
+## 属性观察
+
 # 初始化 ([initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
 指初始化`类`, `结构体`, 或`枚举`的实例, 并给`存储属性`赋值等操作.
