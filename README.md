@@ -17,6 +17,8 @@
 # 目录
 
 - [属性](https://github.com/Huang-Libo/Swift-Document-Digest#属性-properties)
+    - [存储属性](https://github.com/Huang-Libo/Swift-Document-Digest#存储属性)
+    - [计算属性](https://github.com/Huang-Libo/Swift-Document-Digest#计算属性)
 - [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
     - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
     - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
@@ -133,7 +135,7 @@ struct AlternativeRect {
 }
 ```
 
-#### 可读的计算属性
+#### 只读的计算属性
 
 一个只有 `getter` 但是没有 `setter` 的计算属性被称作*只读的计算属性*. 
 
