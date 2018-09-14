@@ -157,6 +157,40 @@ print("the volume of fourByFiveByTwo is \(fourByFiveByTwo.volume)")
 
 ## 属性观察者
 
+`willset`: 就在值被存储的前一刻调用.  
+`didSet`: 在新值被设置后立即调用.  
+
+你可以给你定义的任何存储属性添加属性观察者, 除了延迟加载的存储属性. 通过在子类中重写父类的属性, 你也可以给继承来的属性(不论存储属性还是计算属性)添加属性观察者. 你不需要为没有重写的计算属性定义属性观察者, 因为你可以在计算属性的 `setter` 中对它们的值的变化做出观察和响应.  
+
+`注意`: 当父类的初始化器被调用后、父类的属性在子类初始化器中被设置, 父类属性的 `willSet` 和 `didSet` 会被调用. 但是在父类的初始化器被调用前、设置本类引入的属性时, 属性观察不会触发.  
+
+```swift
+class StepCounter {
+    var totalSteps: Int = 0 {
+        willSet(newTotalSteps) {
+            print("About to set totalSteps to \(newTotalSteps)")
+        }
+        didSet {
+            if totalSteps > oldValue  {
+                print("Added \(totalSteps - oldValue) steps")
+            }
+        }
+    }
+}
+let stepCounter = StepCounter()
+stepCounter.totalSteps = 200
+// About to set totalSteps to 200
+// Added 200 steps
+stepCounter.totalSteps = 360
+// About to set totalSteps to 360
+// Added 160 steps
+stepCounter.totalSteps = 896
+// About to set totalSteps to 896
+// Added 536 steps
+```
+
+注意: 如果你把一个有属性观察器的属性传递给一个函数的`in-out`参数, `willSet` 和 `didSet` 观察器总会被调用. 这是由于 `in-out` 参数的 `copy-in copy-out` 内存模型: 在函数的结尾处值总是会被写回属性.   
+
 # 初始化 ([initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
 指初始化`类`, `结构体`, 或`枚举`的实例, 并给`存储属性`赋值等操作.
@@ -595,7 +629,7 @@ if unknownUnit == nil {
 
 #### 带有原始值枚举的可失败初始化器
 
-带有原始值的枚举会自动获得一个可失败的初始化器, `init?(rawValue:)`. `rawValue` 参数的类型由对应的 raw-value 决定.  
+带有原始值的枚举会自动获得一个可失败的初始化器, `init?(rawValue:)`, `rawValue` 参数的类型由对应的 raw-value 决定.  
 
 ```swift
 enum TemperatureUnit: Character {
