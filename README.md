@@ -21,6 +21,7 @@
 - [属性](https://github.com/Huang-Libo/Swift-Document-Digest#属性-properties)
     - [存储属性](https://github.com/Huang-Libo/Swift-Document-Digest#存储属性)
     - [计算属性](https://github.com/Huang-Libo/Swift-Document-Digest#计算属性)
+    - [属性观察者](https://github.com/Huang-Libo/Swift-Document-Digest#属性观察者)
 - [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
     - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
     - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
