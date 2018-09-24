@@ -37,6 +37,7 @@
     - [必要初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#必要初始化器)
     - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
 - [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化-deinitialization)
+- [扩展](https://github.com/Huang-Libo/Swift-Document-Digest#扩展-extensions)
 - [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 属性 ([properties](https://docs.swift.org/swift-book/LanguageGuide/Properties.html))
@@ -927,6 +928,23 @@ deinit {
 反初始化器是在实例即将要被释放前自动调用的. 你不能自己调用反初始化器. 父类的反初始化器会被子类自动继承, 并且父类的反初始化器会在子类的反初始化器实现的最后面自动调用. 父类的反初始化器总是会被调用, 即使子类没有提供反初始化器.  
 
 因为实例是在反初始化器调用后才被释放, 所以在反初始化器里面,    可以获取这个实例的所有属性, 并且可以基于这些属性修改实例自身的行为. (比如查找需要关闭的文件的名称)  
+
+# 扩展
+
+`扩展`为已存在的`类`、`结构体`、`枚举`或`协议`添加新功能。这包括拓展你无法获取源码的类型的能力（逆向建模）。`扩展`和 `Objective-C` 中的`分类`类似（不同的是，Swift 的`扩展`没有名称）。  
+
+Swift 中的`扩展`可以：  
+
+- 添加`计算实例属性`和`计算类型属性`
+- 定义`实例方法`和`类方法`
+- 提供新初始化器
+- 定义下标
+- 定义和使用新的嵌套类型
+- 让已存在的类型遵守一个协议
+
+在 Swift 中，你甚至可以扩展一个协议来实现它的要求或者添加额外的功能以让遵循协议的类型利用。更多细节请看`协议拓展`（链接待补）
+
+注意：扩展可以为类型添加新功能，但是它们不能重写已存在的功能。  
 
 # 参考资料
 
