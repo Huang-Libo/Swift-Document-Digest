@@ -24,6 +24,9 @@
     - [属性观察者](https://github.com/Huang-Libo/Swift-Document-Digest#属性观察者)
     - [全局和局部变量](https://github.com/Huang-Libo/Swift-Document-Digest#全局和局部变量)
     - [类型属性](https://github.com/Huang-Libo/Swift-Document-Digest#类型属性)
+- [下标](https://github.com/Huang-Libo/Swift-Document-Digest#下标-subscripts)
+    - [下标的语法](https://github.com/Huang-Libo/Swift-Document-Digest#下标的语法)
+    - [下标选项](https://github.com/Huang-Libo/Swift-Document-Digest#下标选项)
 - [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
     - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
     - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
@@ -236,6 +239,66 @@ class SomeClass {
     }
     class var overrideableComputedTypeProperty: Int {
         return 107
+    }
+}
+```
+
+# 下标 ([subscripts](https://docs.swift.org/swift-book/LanguageGuide/Subscripts.html))
+
+`类`、`结构体`和`枚举`可以定义`下标`，它是访问集合、列表或者序列中的元素的快捷方式。
+
+你可以为单个类型定义多个下标，合适的下标会被重载使用，基于你传递给下标的索引值的类型(`下标重载`)。下标没有被限制在单一的维度，你可以定义多个输入参数的下标以满足你的自定义类的需求。  
+
+## 下标的语法
+
+下标的语法和`实例方法`、`计算属性`的语法类似。和`实例方法`不一样的是，下标可以是可读写的或只读的。这个行为是通过 `getter` 和 `setter` 来传达的，和`计算属性`类似。  
+
+```swift
+subscript(index: Int) -> Int {
+    get {
+        // return an appropriate subscript value here
+    }
+    set(newValue) {
+        // perform a suitable setting action here
+    }
+}
+```
+
+`newValue` 的类型和下标的返回值类型相同。和`计算属性`类似，如果你没有指定 `setter` 参数的名称，那么默认的名称就是 `newValue`，如果下标是只读的，`get` 关键字及其花括号可以被省略：  
+
+```swift
+subscript(index: Int) -> Int {
+    // return an appropriate subscript value here
+}
+```
+
+## 下标选项
+
+下标可以使用`可变参数（variadic parameters）`，但是它们不能使用 `in-out` 参数或是提供默认参数值。  
+
+一个例子：  
+
+```swift
+struct Matrix {
+    let rows: Int, columns: Int
+    var grid: [Double]
+    init(rows: Int, columns: Int) {
+        self.rows = rows
+        self.columns = columns
+        grid = Array(repeating: 0.0, count: rows * columns)
+    }
+    func indexIsValid(row: Int, column: Int) -> Bool {
+        return row >= 0 && row < rows && column >= 0 && column < columns
+    }
+    subscript(row: Int, column: Int) -> Double {
+        get {
+            assert(indexIsValid(row: row, column: column), "Index out of range")
+            return grid[(row * columns) + column]
+        }
+        set {
+            assert(indexIsValid(row: row, column: column), "Index out of range")
+            grid[(row * columns) + column] = newValue
+        }
     }
 }
 ```
