@@ -38,6 +38,12 @@
     - [通过闭包或函数来设置属性的默认值](https://github.com/Huang-Libo/Swift-Document-Digest#通过闭包或函数来设置属性的默认值)
 - [反初始化](https://github.com/Huang-Libo/Swift-Document-Digest#反初始化-deinitialization)
 - [扩展](https://github.com/Huang-Libo/Swift-Document-Digest#扩展-extensions)
+    - [扩展语法](https://github.com/Huang-Libo/Swift-Document-Digest#扩展语法)
+    - [计算属性](https://github.com/Huang-Libo/Swift-Document-Digest#计算属性)
+    - [初始化器](https://github.com/Huang-Libo/Swift-Document-Digest#初始化器)
+    - [方法](https://github.com/Huang-Libo/Swift-Document-Digest#方法)
+    - [下标](https://github.com/Huang-Libo/Swift-Document-Digest#下标)
+    - [嵌套类型](https://github.com/Huang-Libo/Swift-Document-Digest#嵌套类型)
 - [参考资料](https://github.com/Huang-Libo/Swift-Document-Digest#参考资料)
 
 # 属性 ([properties](https://docs.swift.org/swift-book/LanguageGuide/Properties.html))
@@ -389,7 +395,7 @@ let twoByTwo = Size(width: 2.0, height: 2.0)
 注意: 
 1. `值类型`和`类类型`的初始化器规则不同, 值类型(结构体和枚举)不支持继承, 所以他们的初始化器委托过程相对简单. 类类型支持继承, 所以它要保证其所继承的所有存储属性都要在初始化时赋一个合适的值.
 2. 如果你给值类型定义了一个自定义的初始化器, 那么你将无法访问`默认初始化器`(或者`成员初始化器`, 对结构体而言). 这个限制防止别人意外地使用自动初始化器而把复杂初始化器里提供的额外必要配置给绕开的情况发生.  
-3. 如果你想让值类型使用默认初始化器或成员初始化器, 同时也使用自定义初始化器, 那么请在`拓展(Extension)`中实现自定义初始化器.
+3. 如果你想让值类型使用默认初始化器或成员初始化器, 同时也使用自定义初始化器, 那么请在`扩展(Extension)`中实现自定义初始化器.
 
 对值类型而言, 可以通过 `self.init`来调用其他初始化器, `self.init`只能在初始化器中调用.
 
@@ -929,9 +935,9 @@ deinit {
 
 因为实例是在反初始化器调用后才被释放, 所以在反初始化器里面,    可以获取这个实例的所有属性, 并且可以基于这些属性修改实例自身的行为. (比如查找需要关闭的文件的名称)  
 
-# 扩展
+# 扩展 ([extensions](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html))
 
-`扩展`为已存在的`类`、`结构体`、`枚举`或`协议`添加新功能。这包括拓展你无法获取源码的类型的能力（逆向建模）。`扩展`和 `Objective-C` 中的`分类`类似（不同的是，Swift 的`扩展`没有名称）。  
+`扩展`为已存在的`类`、`结构体`、`枚举`或`协议`添加新功能。这包括扩展你无法获取源码的类型的能力（逆向建模）。`扩展`和 `Objective-C` 中的`分类`类似（不同的是，Swift 的`扩展`没有名称）。  
 
 Swift 中的`扩展`可以：  
 
@@ -942,9 +948,35 @@ Swift 中的`扩展`可以：
 - 定义和使用新的嵌套类型
 - 让已存在的类型遵守一个协议
 
-在 Swift 中，你甚至可以扩展一个协议来实现它的要求或者添加额外的功能以让遵循协议的类型利用。更多细节请看`协议拓展`（链接待补）
+在 Swift 中，你甚至可以扩展一个协议来实现它的要求或者添加额外的功能以让遵循协议的类型利用。更多细节请看`协议扩展`（本页链接待补 https://docs.swift.org/swift-book/LanguageGuide/Protocols.html#ID521）
 
 注意：扩展可以为类型添加新功能，但是它们不能重写已存在的功能。  
+
+## 扩展语法
+
+使用 `extension` 关键字定义扩展：  
+
+```swift
+extension SomeType {
+    // new functionality to add to SomeType goes here
+}
+```
+
+如果需要遵守协议（[使用扩展来遵守协议（链接待补）]()）：  
+
+```swift
+extension SomeType: SomeProtocol, AnotherProtocol {
+    // implementation of protocol requirements goes here
+}
+```
+
+如[扩展一个泛型类型（链接待补）]()中描述的一样，`扩展`可以用来扩展一个已存在的泛型类型。如[带有泛型 Where 分句的扩展（链接待补）]()中描述的那样，你也可以扩展一个泛型类型来有条件地添加功能。  
+
+注意：如果你定义了一个`扩展`为一个已存在的类型添加了新功能，那么这个新功能将对该类型所有已存在的实例适用，即使它们是在该`扩展`定义前创建的。  
+
+## 计算属性
+
+
 
 # 参考资料
 
