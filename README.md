@@ -23,6 +23,7 @@
     - [计算属性](https://github.com/Huang-Libo/Swift-Document-Digest#计算属性)
     - [属性观察者](https://github.com/Huang-Libo/Swift-Document-Digest#属性观察者)
     - [全局和局部变量](https://github.com/Huang-Libo/Swift-Document-Digest#全局和局部变量)
+    - [类型属性](https://github.com/Huang-Libo/Swift-Document-Digest#类型属性)
 - [初始化](https://github.com/Huang-Libo/Swift-Document-Digest#初始化-initialization)
     - [为存储属性设置初始化值](https://github.com/Huang-Libo/Swift-Document-Digest#为存储属性设置初始化值)
     - [自定义初始化](https://github.com/Huang-Libo/Swift-Document-Digest#自定义初始化)
@@ -39,7 +40,7 @@
 
 属性把值与特定的`类`, `结构体`, 或`枚举`关联起来. 
 
-存储属性存储常量和变量以作为实例的一部分, 反之计算属性是计算(而不是存储)值. 计算属性可由`类`, `结构体`和`枚举`定义. 存储只能被`类`和`结构体`定义.  
+存储属性存储常量和变量以作为实例的一部分, 反之计算属性是计算(而不是存储)值. 计算属性可由`类`, `结构体`和`枚举`定义. 存储属性只能被`类`和`结构体`定义.  
 
 ## 存储属性
 
@@ -203,6 +204,42 @@ stepCounter.totalSteps = 896
 
 注意: 全局常量和变量总是延迟计算, 和`延迟存储属性`的方式类似. 和延迟存储属性不一样的是, 全局常量和变量不需要添加`lazy`修饰符.  而局部常量和变量不能延迟计算.  
 
+## 类型属性
+
+类型属性在定义特定类型的所有实例的通用值的时候很有用, 比如所有实例都能使用的常量属性(和 C 语言中的 `static` 常量类似), 或者存储着对此类型的所有实例全局可用的可变属性(和 C 语言中的 `static` 变量类似).  
+
+注意: 和`存储实例属性`不一样的是, 你必须总是给`存储类型属性`一个默认值. 这是因为这个类型自身在初始化时没有可以给`存储类型属性`赋一个值的初始化器.       
+
+`存储类型属性`的初始化会延迟到它们第一次被访问时. 它们被确保只会被初始化一次, 即使同时被多个线程访问也是如此. 并且它们不需要添加 `lazy` 修饰符.  
+
+#### 类型属性的语法
+
+使用 `static` 关键字来定义`类型属性`. 对于`类`类型的`计算属性`来说, 你可以使用 `class` 关键字来允许子类重写父类的实现. 
+
+```swift
+struct SomeStructure {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 1
+    }
+}
+enum SomeEnumeration {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 6
+    }
+}
+class SomeClass {
+    static var storedTypeProperty = "Some value."
+    static var computedTypeProperty: Int {
+        return 27
+    }
+    class var overrideableComputedTypeProperty: Int {
+        return 107
+    }
+}
+```
+ 
 # 初始化 ([initialization](https://docs.swift.org/swift-book/LanguageGuide/Initialization.html))
 
 指初始化`类`, `结构体`, 或`枚举`的实例, 并给`存储属性`赋值等操作.
